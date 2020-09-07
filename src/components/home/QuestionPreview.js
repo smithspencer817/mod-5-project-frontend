@@ -55,7 +55,7 @@ const isAnswered = props.question.answers.length !== 0
           {
             props.question.questioner.username === props.currentUser.username ?
             <Modal.Content>
-              <Form onSubmit={(e) => props.handleReviewSubmit(e)}>
+              <Form onSubmit={(e) => props.handleReviewSubmit(e, props.question.answerer)}>
                 <Form.Field inline>
                   <label>{`Give ${props.question.answerer.name} a review`}</label>
                   <select class="ui dropdown" placeholder={`Rate ${props.question.answerer.name}'s response`} style={{'width': '50px'}}>

@@ -190,9 +190,26 @@ class App extends Component {
     })
   }
 
-  handleReviewSubmit = (e) => {
+  handleReviewSubmit = (e, answerer) => {
     e.preventDefault();
-    console.log(e.target[0].value)
+
+    const review = {
+      rating: e.target[0].value,
+      review_receiver_id: answerer.id,
+      review_giver_id: this.state.user.id
+    }
+
+    fetch('http://localhost:3000/reviews', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    })
+    .then(res => res.json())
+    .then(review => console.log(review))
   }
 
   logOut = () => {
