@@ -23,7 +23,7 @@ export default class HomePageContent extends Component {
                         </Grid.Column>
                         <Grid.Column width={8}>
                             <Segment style={{overflow: 'auto', maxHeight: 510}} className="home-questions-container">
-                                <HomeQuestionsContainer allQuestions={this.props.allQuestions}/>
+                                <HomeQuestionsContainer allQuestions={this.props.allQuestions} currentUser={this.props.currentUser} handleReviewSubmit={this.props.handleReviewSubmit}/>
                             </Segment>
                         </Grid.Column>
                         <Grid.Column width={4}>

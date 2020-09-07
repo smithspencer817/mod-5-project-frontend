@@ -190,6 +190,11 @@ class App extends Component {
     })
   }
 
+  handleReviewSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value)
+  }
+
   logOut = () => {
     this.setState({
       user: null
@@ -206,7 +211,11 @@ class App extends Component {
             </Route>
             <Route path="/home">
               <NavBar />
-              <HomePageContent allQuestions={this.state.allQuestions}/>
+              <HomePageContent 
+                allQuestions={this.state.allQuestions}
+                currentUser={this.state.user}
+                handleReviewSubmit={this.handleReviewSubmit}
+              />
             </Route>
             <Route exact path="/profile">
               <NavBar />
@@ -215,6 +224,7 @@ class App extends Component {
                 allQuestions={this.state.allQuestions}
                 handleAnswerSubmit={this.handleAnswerSubmit}
                 handleAnswerDelete={this.handleAnswerDelete}
+                handleReviewSubmit={this.handleReviewSubmit}
               />
             </Route>
             <Route path="/search">

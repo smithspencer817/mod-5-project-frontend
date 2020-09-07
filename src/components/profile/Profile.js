@@ -106,7 +106,7 @@ export default class Profile extends Component {
                             <Message color="red">No Questions Found...</Message>
                             :
                             this.state.posedQuestions.map(question => 
-                            <QuestionPreview question={question} />
+                            <QuestionPreview question={question} currentUser={this.props.user} handleReviewSubmit={this.props.handleReviewSubmit}/>
                             )
                         }
                         </Segment>

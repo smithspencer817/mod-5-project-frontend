@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Divider, Header, Segment, Message } from 'semantic-ui-react'
+import { Button, Modal, Divider, Header, Segment, Message, Select, Form } from 'semantic-ui-react'
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -52,12 +52,33 @@ const isAnswered = props.question.answers.length !== 0
             <Message color="red" header={`${props.question.answerer.name} hasn't responded yet...`}></Message>
           }
         </Modal.Content>
+          {
+            props.question.questioner.username === props.currentUser.username ?
+            <Modal.Content>
+              <Form onSubmit={(e) => props.handleReviewSubmit(e)}>
+                <Form.Field inline>
+                  <label>{`Give ${props.question.answerer.name} a review`}</label>
+                  <select class="ui dropdown" placeholder={`Rate ${props.question.answerer.name}'s response`} style={{'width': '50px'}}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <Button type="submit">Review {props.question.answerer.name}</Button>
+                </Form.Field>
+              </Form>
+            </Modal.Content>
+            :
+            null
+          }
         <Modal.Actions>
           {
             isAnswered ?
             <Button positive onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
               That's Cool
             </Button>
+            
             :
             <Button negative onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
               That's Lame
