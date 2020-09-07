@@ -28,7 +28,7 @@ code {
 }
 
 .ui.card {
-  margin: 20px !important;
+  margin: 0px 20px 20px 20px !important;
 }
 
 .nav-bar {
@@ -52,4 +52,9 @@ code {
 
 .profile-search-bars {
   margin-bottom: -15px;
+}
+
+#question-form-container {
+  border: 1px solid black;
+  padding: 40px;
 }
