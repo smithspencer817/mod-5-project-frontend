@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#question-search-card-container {
+  overflow: auto;
+  white-space: nowrap;
+  padding: 20px;
+  width: auto;
+}
+
+#question-search-card-container > div {
+  display: inline-block;
+}
+
+#question-search-card-container::-webkit-scrollbar {
+  display: none;
+}
+
+.ui.card {
+  margin: 20px !important;
+}
+
+.nav-bar {
+  margin: 0px !important;
+}
+
+.question-preview, .profile-question {
+  margin: 0px 0px 40px 0px;
+  box-shadow: 0 10px 20px 0 rgba(26, 27, 29, 0.15);
+}
+
+.profile-header {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.home-header {
+  margin-top: 30px;
+}
+
+.profile-search-bars {
+  margin-bottom: -15px;
+}
