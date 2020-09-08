@@ -13,8 +13,6 @@ import {
   withRouter
 } from "react-router-dom";
 
-
-
 class App extends Component {
 
   state = {
@@ -26,7 +24,8 @@ class App extends Component {
     // question form
     promptedUser: null,
     promptedUserSkill: '',
-    questionSearchUsers: []
+    questionSearchUsers: [],
+    userAnswersGiven: null
   }
 
   componentDidMount() {
@@ -131,11 +130,10 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(question => {
-      console.log(question)
-      console.log(this.state.allQuestions)
       this.setState({
         allQuestions: [question, ...this.state.allQuestions]
       })
+      this.props.history.push('/profile')
     })
   }
 
@@ -247,6 +245,7 @@ class App extends Component {
             <Route path="/search">
               <NavBar />
               <QuestionSearch 
+                currentUser={this.state.user}
                 allSkills={this.state.allSkills}
                 questionSearchUsers={this.state.questionSearchUsers}
                 handleQuestionSearchDropdown={this.handleQuestionSearchDropdown}

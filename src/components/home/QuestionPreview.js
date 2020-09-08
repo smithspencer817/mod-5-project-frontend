@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Divider, Header, Segment, Message, Select, Form } from 'semantic-ui-react'
+import { Button, Modal, Divider, Header, Segment, Message, Form, Grid } from 'semantic-ui-react'
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -21,19 +21,30 @@ const { open, dimmer } = state
 
 const isAnswered = props.question.answers.length !== 0
 
+let [date, minute] = props.question.created_at.split("T")
+let [hour, min, second] = minute.slice(0,8).split(':')
+
+hour = parseInt(hour) + 7
+
+if (parseInt(hour) > 12) {
+  hour = parseInt(hour) - 12
+} else if (parseInt(hour) === 0) {
+  hour = 12
+}
+
   return (
     <div className="question-preview">
-        <Segment>
-            <Header as='h2' floated='right'>
+        <Segment className="question-preview-segment">
+            <Header as='h2' floated='left'>
             {props.question.text}
             </Header>
 
             <Divider clearing />
             
-                <strong>{props.question.questioner.username}</strong> asked {props.question.answerer.username}
-                <Segment.Group>
-                <Segment onClick={() => dispatch({ type: 'OPEN_MODAL', dimmer: 'blurring' })}>{props.question.answers.length} response(s)</Segment>
-                </Segment.Group>
+            <strong>{props.question.questioner.username}</strong> <em>asked</em> <strong>{props.question.answerer.username}</strong> <em>@ {hour}:{min}</em>
+            <Segment.Group>
+            <Segment className="question-preview-answers" onClick={() => dispatch({ type: 'OPEN_MODAL', dimmer: 'blurring' })}>{props.question.answers.length} response(s)</Segment>
+            </Segment.Group>
             
         </Segment>
       
@@ -43,21 +54,23 @@ const isAnswered = props.question.answers.length !== 0
         open={open}
         onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
       >
-        <Modal.Header>{props.question.questioner.name} asked... "{props.question.text}"</Modal.Header>
+        <Modal.Header>"{props.question.text}"</Modal.Header>
         <Modal.Content>
           {
             isAnswered ?
-            <Message color="green" header={`${props.question.answerer.name} responded...`} list={props.question.answers.map(answer => <li>{answer.text}</li>)}></Message>
+            <div>
+            <h4>{`${props.question.answerer.name} responded...`}</h4>
+            <Message color="green" list={props.question.answers.map(answer => <li>{answer.text}</li>)}></Message>
+            </div>
             :
             <Message color="red" header={`${props.question.answerer.name} hasn't responded yet...`}></Message>
           }
         </Modal.Content>
           {
-            props.question.questioner.username === props.currentUser.username ?
+            props.question.questioner.username === props.currentUser.username && isAnswered ?
             <Modal.Content>
               <Form onSubmit={(e) => props.handleReviewSubmit(e, props.question.answerer)}>
                 <Form.Field inline>
-                  <label>{`Give ${props.question.answerer.name} a review`}</label>
                   <select class="ui dropdown" placeholder={`Rate ${props.question.answerer.name}'s response`} style={{'width': '50px'}}>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -65,7 +78,7 @@ const isAnswered = props.question.answers.length !== 0
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  <Button type="submit">Review {props.question.answerer.name}</Button>
+                  <Button type="submit" size="mini" basic color="green" >Review {props.question.answerer.name}'s Response</Button>
                 </Form.Field>
               </Form>
             </Modal.Content>

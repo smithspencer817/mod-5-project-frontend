@@ -43,7 +43,6 @@ code {
 .profile-header {
   margin-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgb(223, 223, 223);
 }
 
 .home-header {
@@ -55,6 +54,38 @@ code {
 }
 
 #question-form-container {
-  border: 1px solid black;
   padding: 40px;
+}
+
+.ui.basic.center.aligned.segment {
+  margin-top: 30px;
+}
+
+.profile-icon {
+  margin-top: 10px !important;
+  color: rgb(114, 114, 114) !important;
+}
+
+.question-preview-segment {
+  /* background-color: rgb(236, 236, 236) !important; */
+}
+
+.question-preview-answers {
+  background-color: rgb(245, 245, 245) !important;
+}
+
+.user-card-icon {
+  margin: 0px 2px 0px 15px !important;
+}
+
+body {
+  background-color: rgb(214, 255, 248) !important;
+}
+
+.questions-container {
+  background-color: rgb(157, 211, 200) !important;
+}
+
+.questions-container::-webkit-scrollbar {
+  display: none;
 }

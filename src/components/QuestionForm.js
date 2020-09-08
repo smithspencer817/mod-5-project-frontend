@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 export default class QuestionForm extends Component {
 
@@ -19,11 +20,11 @@ export default class QuestionForm extends Component {
                         <Grid.Column width={4}>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                        <h1>What would you like to ask { promptedUser.name } about { promptedUserSkill.name }?</h1>
-                        <Form onSubmit={(e) => this.props.handleQuestionSubmit(e)}>
-                            <Form.TextArea name="question-input" label='Ask a question' placeholder='What would you like to know...' />
-                            <Form.Button>Ask { promptedUser.name }</Form.Button>
-                        </Form>
+                            <h1>What would you like to ask { promptedUser.name } about { promptedUserSkill.name }?</h1>
+                            <Form onSubmit={(e) => this.props.handleQuestionSubmit(e)}>
+                                <Form.TextArea name="question-input" label='Ask a question' placeholder='What would you like to know...' />
+                                <Form.Button>Ask { promptedUser.name }</Form.Button>
+                            </Form>
                         </Grid.Column>
                         <Grid.Column width={4}>
                         </Grid.Column>

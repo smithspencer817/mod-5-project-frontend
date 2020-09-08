@@ -51,6 +51,7 @@ export default class Profile extends Component {
 
     render(){
         const user = this.props.user
+        const averageRating = (user.received_reviews.map(r => r.rating).reduce((a,b) => a + b)) / user.received_reviews.length
         return(
             <Grid>
 
@@ -59,9 +60,10 @@ export default class Profile extends Component {
                         <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' size='small' circular floated="right"/>
                     </Grid.Column>
                     <Grid.Column width={8} verticalAlign="middle">
-                        <Header as='h4'><Icon name='user' size='small' />{user.name}</Header>
-                        <Header as='h5'><Icon name='question circle outline' size='small' />Questions Asked: {user.posed_questions.length}</Header>
-                        <Header as='h5'><Icon name='share square outline' size='small' />Answers Given: {user.answers.length}</Header>
+                        <Header as='h2'><Icon name='user' size='small' />{user.name}</Header>
+                        <Header as='h5' className="profile-icon"><Icon name='question circle outline' size='small' />Questions Asked: {user.posed_questions.length}</Header>
+                        <Header as='h5' className="profile-icon"><Icon name='share square outline' size='small' />Answers Given: {user.answers.length}</Header>
+                        <Header as='h5' className="profile-icon"><Icon name='thumbs up outline' size='small' />Average Rating: {averageRating}</Header>
                     </Grid.Column>
                 </Grid.Row>
                 
@@ -82,7 +84,7 @@ export default class Profile extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={2} verticalAlign="middle">
-                        <Header as='h3' floated="right">You gave</Header>
+                        <Header as='h3' floated="right">You answered</Header>
                     </Grid.Column>
                     <Grid.Column width={3}>
                         <div class="ui search">
@@ -100,7 +102,7 @@ export default class Profile extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={5}>
-                        <Segment style={{overflow: 'auto', maxHeight: 378 }}>
+                        <Segment style={{overflow: 'auto', maxHeight: 440 }} className="questions-container">
                         {
                             this.state.posedQuestions.length === 0 ?
                             <Message color="red">No Questions Found...</Message>
@@ -114,7 +116,7 @@ export default class Profile extends Component {
                     <Grid.Column width={2}>
                     </Grid.Column>
                     <Grid.Column width={5}>
-                        <Segment style={{overflow: 'auto', maxHeight: 378 }}>
+                        <Segment style={{overflow: 'auto', maxHeight: 440 }} className="questions-container">
                         {
                             this.state.receivedQuestions.length === 0 ?
                             <Message color="red">No Questions Found...</Message>

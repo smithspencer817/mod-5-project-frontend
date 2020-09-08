@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export default class UserCard extends Component {
     render(){
         const user = this.props.user
+        const averageRating = (user.received_reviews.map(r => r.rating).reduce((a,b) => a + b)) / user.received_reviews.length
         return(
             <div className="user-card">
                 <Card>
@@ -16,8 +17,12 @@ export default class UserCard extends Component {
                     </Card.Meta>
                     </Card.Content>
                     <Card.Content extra>
-                        <Icon name='question circle outline' />
-                        {user.answers.length} answers given
+                        <Icon className="user-card-icon" name='question circle outline' />
+                        {user.posed_questions.length}
+                        <Icon className="user-card-icon" name='thumbs up outline' />
+                        {averageRating}
+                        <Icon className="user-card-icon" name="share square outline" />
+                        {user.answers.length}
                     </Card.Content>
                 </Card>
             </div>

@@ -12,23 +12,25 @@ export default class QuestionSearch extends Component {
             value: skill.name
         }))
 
+        const filteredUsers = this.props.questionSearchUsers.filter(user => user.id !== this.props.currentUser.id)
+
         return(
             <div>
                 <Segment basic textAlign='center'>
                     <Input
-                    action={{ color: 'blue', content: 'Search' }}
+                    
                     icon='search'
                     iconPosition='left'
                     placeholder='Search by username'
                     onChange={(e, data) => this.props.handleQuestionSearchbar(e, data)}
                     />
 
-                    <Divider horizontal>filter by skill</Divider>
+                    <Divider horizontal>or filter by skill</Divider>
 
-                    <Dropdown onChange={(e, data) => this.props.handleQuestionSearchDropdown(e, data)} placeholder='Skill' search selection options={skillOptions} />
+                    <Dropdown onChange={(e, data) => this.props.handleQuestionSearchDropdown(e, data)} placeholder='Pick a skill' search selection options={skillOptions} />
                 </Segment>
                 <Container id='question-search-card-container'>
-                    {this.props.questionSearchUsers.map(user => <UserCard user={user} key={user.id} handlePromptedUser={this.props.handlePromptedUser} />)}
+                    {filteredUsers.map(user => <UserCard user={user} key={user.id} handlePromptedUser={this.props.handlePromptedUser} />)}
                 </Container>
             </div>
         )

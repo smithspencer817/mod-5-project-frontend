@@ -7,7 +7,7 @@ export default class HomePageContent extends Component {
         return(
             <div>
                 <Grid>
-                    <Grid.Row className='home-header'>
+                    <Grid.Row className='home-header home-page-area'>
                         <GridColumn width={4}>
 
                         </GridColumn>
@@ -18,11 +18,12 @@ export default class HomePageContent extends Component {
                             
                         </GridColumn>
                     </Grid.Row>
-                    <Grid.Row>
+
+                    <Grid.Row className='home-page-area'>
                         <Grid.Column width={4}>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <Segment style={{overflow: 'auto', maxHeight: 510}} className="home-questions-container">
+                            <Segment style={{overflow: 'auto', maxHeight: 570}} className="questions-container">
                                 <HomeQuestionsContainer allQuestions={this.props.allQuestions} currentUser={this.props.currentUser} handleReviewSubmit={this.props.handleReviewSubmit}/>
                             </Segment>
                         </Grid.Column>
