@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Divider, Header, Segment, Message, Form, Grid } from 'semantic-ui-react'
+import { Button, Modal, Divider, Header, Segment, Message, Form } from 'semantic-ui-react'
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -21,17 +21,6 @@ const { open, dimmer } = state
 
 const isAnswered = props.question.answers.length !== 0
 
-let [date, minute] = props.question.created_at.split("T")
-let [hour, min, second] = minute.slice(0,8).split(':')
-
-hour = parseInt(hour) + 7
-
-if (parseInt(hour) > 12) {
-  hour = parseInt(hour) - 12
-} else if (parseInt(hour) === 0) {
-  hour = 12
-}
-
   return (
     <div className="question-preview">
         <Segment className="question-preview-segment">
@@ -41,7 +30,7 @@ if (parseInt(hour) > 12) {
 
             <Divider clearing />
             
-            <strong>{props.question.questioner.username}</strong> <em>asked</em> <strong>{props.question.answerer.username}</strong> <em>@ {hour}:{min}</em>
+            <strong>{props.question.questioner.username}</strong> <em>asked</em> <strong>{props.question.answerer.username}</strong>
             <Segment.Group>
             <Segment className="question-preview-answers" onClick={() => dispatch({ type: 'OPEN_MODAL', dimmer: 'blurring' })}>{props.question.answers.length} response(s)</Segment>
             </Segment.Group>

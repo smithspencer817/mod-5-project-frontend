@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Login from './components/Login';
 import HomePageContent from './components/home/HomePageContent'
 import NavBar from './components/NavBar'
@@ -69,8 +69,12 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(user => {
-      this.setState({user})
-      this.props.history.push('/home')
+      if (user.success = false) {
+        this.props.history.push('/login')
+      } else {
+        this.setState({user})
+        this.props.history.push('/home')
+      }
     })
   }
 
@@ -211,9 +215,14 @@ class App extends Component {
   }
 
   logOut = () => {
-    this.setState({
-      user: null
+
+    fetch('http://localhost:3000/logout', {
+      credentials: 'include',
     })
+    .then(this.setState({
+      user: null
+    }))
+
   }
 
   render() {
@@ -225,7 +234,7 @@ class App extends Component {
               <Login handleLogin={this.handleLogin}/>
             </Route>
             <Route path="/home">
-              <NavBar />
+              <NavBar logOut={this.logOut} />
               <HomePageContent 
                 allQuestions={this.state.allQuestions}
                 currentUser={this.state.user}
@@ -233,7 +242,7 @@ class App extends Component {
               />
             </Route>
             <Route exact path="/profile">
-              <NavBar />
+              <NavBar logOut={this.logOut} />
               <Profile 
                 user={this.state.user}
                 allQuestions={this.state.allQuestions}
@@ -243,7 +252,7 @@ class App extends Component {
               />
             </Route>
             <Route path="/search">
-              <NavBar />
+              <NavBar logOut={this.logOut} />
               <QuestionSearch 
                 currentUser={this.state.user}
                 allSkills={this.state.allSkills}
@@ -254,7 +263,7 @@ class App extends Component {
               />
             </Route>
             <Route path="/form">
-              <NavBar />
+              <NavBar logOut={this.logOut} />
               <QuestionForm 
                 currentUser={this.state.user}
                 promptedUser={this.state.promptedUser}

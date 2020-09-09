@@ -19,10 +19,10 @@ export default class UserCard extends Component {
                     <Card.Content extra>
                         <Icon className="user-card-icon" name='question circle outline' />
                         {user.posed_questions.length}
-                        <Icon className="user-card-icon" name='thumbs up outline' />
-                        {averageRating}
                         <Icon className="user-card-icon" name="share square outline" />
                         {user.answers.length}
+                        <Icon className="user-card-icon" name='thumbs up outline' />
+                        {averageRating}
                     </Card.Content>
                 </Card>
             </div>

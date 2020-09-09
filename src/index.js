@@ -6,10 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  withRouter
+  BrowserRouter as Router
 } from "react-router-dom";
 
 ReactDOM.render(
