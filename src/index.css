@@ -93,3 +93,8 @@ body {
 .login-container {
   margin-top: 15vh !important;
 }
+
+#question-search-card-container {
+  margin: auto !important;
+  text-align: center !important;
+}
